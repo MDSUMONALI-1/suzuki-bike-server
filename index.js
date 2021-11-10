@@ -14,11 +14,10 @@ async function run() {
     const bikes = database.collection('bikes');
     console.log("database connected")
     // Query for a movie that has the title 'Back to the Future'
-    const query = { name: 'honda' };
-    const bike = await bikes.findOne(query);
-    console.log(bike);
+   
+ 
   } finally {
-    // Ensures that the client will close when you finish/error
+    
     // await client.close();
   }
 }
