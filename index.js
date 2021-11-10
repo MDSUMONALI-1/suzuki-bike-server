@@ -11,10 +11,16 @@ async function run() {
   try {
     await client.connect();
     const database = client.db('store');
-    const bikes = database.collection('bikes');
+    const bikesCollection = database.collection('bikes');
     console.log("database connected")
     // Query for a movie that has the title 'Back to the Future'
-   
+    app.get('/bikes', async (req, res) => {
+      const cursor = bikesCollection.find({});
+      const bikes = await cursor.toArray();
+      res.send(bikes);
+  });
+
+ 
  
   } finally {
     
