@@ -2,7 +2,10 @@ const express = require('express')
 const { MongoClient } = require("mongodb");
 const app = express()
 const port =process.env.PORT||5000
+const cors = require('cors');
 
+app.use(cors());
+app.use(express.json());
 const uri =
   "mongodb+srv://aliceng:CPYGPkH0idj7KPLX@cluster0.aq2lr.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
   const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
