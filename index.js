@@ -15,6 +15,7 @@ async function run() {
     await client.connect();
     const database = client.db('store');
     const bikesCollection = database.collection('bikes');
+    const usersCollection = database.collection('users');
     console.log("database connected")
     // Query for a movie that has the title 'Back to the Future'
     app.get('/bikes', async (req, res) => {
