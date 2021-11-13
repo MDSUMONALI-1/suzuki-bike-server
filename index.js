@@ -44,6 +44,12 @@ async function run() {
     res.json({ admin: isAdmin });
 })
 
+app.get('/users', async (req, res) => {
+  const cursor = usersCollection.find({});
+  const users = await cursor.toArray();
+  res.send(users);
+});
+
 app.post('/users', async (req, res) => {
     const user = req.body;
     const result = await usersCollection.insertOne(user);
