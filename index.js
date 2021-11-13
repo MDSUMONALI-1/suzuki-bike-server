@@ -71,7 +71,7 @@ app.put('/users', async (req, res) => {
     console.log('put',user)
     const filter = { email: user.email };
  
-    const updateDoc = { $set: user };
+    const updateDoc = { $set: {role: 'admin'} };
     const result = await usersCollection.updateOne(filter, updateDoc);
     res.json(result);
 });
