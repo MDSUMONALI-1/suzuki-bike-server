@@ -33,7 +33,12 @@ async function run() {
       const bike = await bikesCollection.findOne(query);
       res.json(bike);
   })
- 
+  app.post('/bikes', async (req, res) => {
+    const bike = req.body;
+    const result = await bikesCollection.insertOne(bike);
+    console.log(result);
+    res.json(result);
+  });
   app.get('/users/:email', async (req, res) => {
     const email = req.params.email;
     const query = { email: email };
@@ -69,9 +74,7 @@ app.put('/users', async (req, res) => {
 
   app.put('/users/admin', async (req, res) => {
     const user = req.body;
-    console.log('put',user)
     const filter = { email: user.email };
- 
     const updateDoc = { $set: {role: 'admin'} };
     const result = await usersCollection.updateOne(filter, updateDoc);
     res.json(result);
