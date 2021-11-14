@@ -16,6 +16,7 @@ async function run() {
     const database = client.db('store');
     const bikesCollection = database.collection('bikes');
     const usersCollection = database.collection('users');
+    const reviewsCollection = database.collection('reviews');
     console.log("database connected")
     // Query for a movie that has the title 'Back to the Future'
     app.get('/bikes', async (req, res) => {
@@ -74,6 +75,17 @@ app.put('/users', async (req, res) => {
     const updateDoc = { $set: {role: 'admin'} };
     const result = await usersCollection.updateOne(filter, updateDoc);
     res.json(result);
+});
+app.get('/reviews', async (req, res) => {
+  const cursor = reviewsCollection.find({});
+  const reviews = await cursor.toArray();
+  res.send(reviews);
+});
+app.post('/review', async (req, res) => {
+  const review = req.body;
+  const result = await reviewsCollection.insertOne(review);
+  console.log(result);
+  res.json(result);
 });
 
   } finally {
