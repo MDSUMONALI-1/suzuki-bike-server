@@ -81,11 +81,9 @@ app.get('/reviews', async (req, res) => {
   const reviews = await cursor.toArray();
   res.send(reviews);
 });
-app.put('/reviews', async (req, res) => {
+app.post('/reviews', async (req, res) => {
   const user = req.body;
-  const filter = { email: user.email };
-  const updateDoc = { $set: user };
-  const result = await reviewsCollection.updateOne(filter, updateDoc);
+  const result = await reviewsCollection.insertOne(user);
   console.log(result);
   res.json(result);
 });
