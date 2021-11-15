@@ -17,6 +17,7 @@ async function run() {
     const bikesCollection = database.collection('bikes');
     const usersCollection = database.collection('users');
     const reviewsCollection = database.collection('reviews');
+    const customersCollection = database.collection('customers')
     console.log("database connected")
     // Query for a movie that has the title 'Back to the Future'
     app.get('/bikes', async (req, res) => {
@@ -47,6 +48,11 @@ res.json(result)
 
 
 })
+app.get('/customers', async (req, res) => {
+  const cursor = customersCollection.find({});
+  const customers = await cursor.toArray();
+  res.send(customers);
+});
 
 app.post('/customers', async (req, res) => {
   const customer = req.body;
