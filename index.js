@@ -39,6 +39,16 @@ async function run() {
     console.log(result);
     res.json(result);
   });
+app.delete('bikes/:id', async (req, res)=>{
+const id = req.params.id;
+const query ={_id: ObjectId(id)}
+const result = await bikesCollection.deleteOne(query);
+res.json(result)
+
+
+})
+
+
   app.get('/users/:email', async (req, res) => {
     const email = req.params.email;
     const query = { email: email };
