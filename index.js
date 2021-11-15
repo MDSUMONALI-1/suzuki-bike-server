@@ -50,6 +50,11 @@ const query ={_id:ObjectId(id)}
 const result = await bikesCollection.deleteOne(query);
 res.json(result)
 })
+app.get('/orders', async (req, res) => {
+  const cursor = ordersCollection.find({});
+  const orders = await cursor.toArray();
+  res.send(orders);
+});
 app.post('/orders', async (req, res) => {
   const order = req.body;
   const result = await ordersCollection.insertOne(order);
