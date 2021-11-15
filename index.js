@@ -30,7 +30,7 @@ async function run() {
   app.get('/bikes/:id', async (req, res) => {
       const id = req.params.id;
       console.log('getting specific bike', id);
-      const query = { _id: ObjectId(id) };
+      const query = {_id:ObjectId(id) };
       const bike = await bikesCollection.findOne(query);
       res.json(bike);
   })
@@ -42,7 +42,7 @@ async function run() {
   });
 app.delete('bikes/:id', async (req, res)=>{
 const id = req.params.id;
-const query ={_id: ObjectId(id)}
+const query ={_id:ObjectId(id)}
 const result = await bikesCollection.deleteOne(query);
 res.json(result)
 
