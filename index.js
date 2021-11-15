@@ -19,6 +19,9 @@ async function run() {
     const usersCollection = database.collection('users');
     const reviewsCollection = database.collection('reviews');
     const customersCollection = database.collection('customers')
+    const ordersCollection = database.collection('orders')
+
+
     console.log("database connected")
     // Query for a movie that has the title 'Back to the Future'
     app.get('/bikes', async (req, res) => {
@@ -46,9 +49,13 @@ const id = req.params.id;
 const query ={_id:ObjectId(id)}
 const result = await bikesCollection.deleteOne(query);
 res.json(result)
-
-
 })
+app.post('/orders', async (req, res) => {
+  const order = req.body;
+  const result = await ordersCollection.insertOne(order);
+  console.log(result);
+  res.json(result);
+});
 app.get('/customers', async (req, res) => {
   const cursor = customersCollection.find({});
   const customers = await cursor.toArray();
