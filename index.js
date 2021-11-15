@@ -48,7 +48,12 @@ res.json(result)
 
 })
 
-
+app.post('/customers', async (req, res) => {
+  const customer = req.body;
+  const result = await customersCollection.insertOne(customer);
+  console.log(result);
+  res.json(result);
+});
   app.get('/users/:email', async (req, res) => {
     const email = req.params.email;
     const query = { email: email };
